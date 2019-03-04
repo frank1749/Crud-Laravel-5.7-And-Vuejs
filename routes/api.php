@@ -25,4 +25,6 @@ Route::group(['prefix' => 'v1'], function () {
 	Route::post('/deleteData', 'ShareController@del_data');
 	Route::post('/updateData', 'ShareController@update');
 
+	Route::get('/prueba_data', 'ShareController@probar');
+
 });

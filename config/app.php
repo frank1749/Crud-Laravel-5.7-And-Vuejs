@@ -150,7 +150,7 @@ return [
         /*
          * Package Service Providers...
          */
-
+        'F2m2\Apidocs\ApidocsServiceProvider',
         /*
          * Application Service Providers...
          */

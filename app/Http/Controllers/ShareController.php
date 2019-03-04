@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Share;
+use App\User;
 
 class ShareController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Single Response
      */
     public function index()
     {
@@ -32,6 +33,13 @@ class ShareController extends Controller
 
         return $this->jsonResponse(true, "Operación de consulta de datos", "Se generó exitosamente la consulta.",0000,$data,200);
     }
+
+    /**
+    * Muestra los datos de un registro específico.
+    *
+    * @param  int  $id: Es el id del registro  
+    * @return Single Response
+    */
 
     public function infoData(Request $request)
     {
@@ -57,11 +65,13 @@ class ShareController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    * Almacenamiento de producto.
+    *
+    * @param  string  $share_name: Es el nombre del producto.  
+    * @param  string  $share_price: Es el valor del producto.  
+    * @param  int  $share_qty: Es la cantidad del producto.  
+    * @return Single Response
+    */
     public function store(Request $request)
     {
 
@@ -88,11 +98,12 @@ class ShareController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    * Servicio que permite eliminar registro.
+    * POST {id}
+    *
+    * @param  int  $id  El id del regisgtro
+    * @return Response
+    */    
     public function del_data(Request $request)
     {
 
@@ -183,4 +194,30 @@ class ShareController extends Controller
 
       return redirect('/shares')->with('success', 'Stock has been deleted Successfully');
     }
+
+    public function probar()
+    {
+
+        /*$email = $request->get('email');
+        $pass = $request->get('pass');*/
+
+        $email = "frank1749@hotmail.com";
+
+        $user_data = \DB::table('users')->where('email', $email)->first();
+
+        if (empty($user_data)) {
+           return $this->jsonResponse(false, "Errores de Actualización", "Error de Actualización",0000,null,200); 
+        }else{
+            return $this->jsonResponse(true, "Errores de Actualización", "Error de Actualización",0000,$email,200);
+        }
+
+        //echo $user->name;
+
+        /*$email = $request->get('email');
+        $pass = $request->get('pass');
+
+        return $this->jsonResponse(false, "Errores de Actualización", "Error de Actualización",0000,$email,200);*/
+
+    }
+
 }
